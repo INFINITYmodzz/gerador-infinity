@@ -10,20 +10,19 @@
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: #05060a; color: #e6e6e6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; position: relative; overflow: hidden; }
   body::before { content: ''; position: fixed; inset: -50%; background: radial-gradient(circle at 20% 30%, rgba(74,222,128,.15), transparent 40%), radial-gradient(circle at 80% 70%, rgba(59,130,246,.12), transparent 40%); animation: bgMove 20s ease-in-out infinite; z-index: 0; }
   @keyframes bgMove { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-3%,-3%) scale(1.05)} }
-  .card { background: rgba(20,22,32,.85); backdrop-filter: blur(20px); border: 1px solid rgba(74,222,128,.15); border-radius: 20px; padding: 32px 28px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.05); position: relative; z-index: 1; animation: cardIn .6s cubic-bezier(.2,.9,.3,1.2); }
+  .card { background: rgba(20,22,32,.85); backdrop-filter: blur(20px); border: 1px solid rgba(74,222,128,.15); border-radius: 20px; padding: 32px 28px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.6); position: relative; z-index: 1; animation: cardIn .6s cubic-bezier(.2,.9,.3,1.2); }
   @keyframes cardIn { from{opacity:0;transform:translateY(30px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
   .logo h1 { font-size: 26px; font-weight: 800; letter-spacing: 3px; background: linear-gradient(135deg,#4ade80 0%,#22d3ee 50%,#a78bfa 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; background-size: 200% 200%; animation: gradientShift 4s ease infinite; margin-bottom: 4px; text-align: center; }
   @keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
   .sub { text-align: center; color: #64748b; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
-  button { width: 100%; background: linear-gradient(135deg,#16a34a 0%,#22c55e 100%); color: #fff; border: 0; padding: 15px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 700; letter-spacing: .5px; transition: all .3s; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(22,163,74,.3); }
-  button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(22,163,74,.5); }
+  button { width: 100%; background: linear-gradient(135deg,#16a34a 0%,#22c55e 100%); color: #fff; border: 0; padding: 15px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 700; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(22,163,74,.3); }
   button:disabled { background: #1e293b; color: #475569; cursor: not-allowed; box-shadow: none; }
   button.sec { background: rgba(51,65,85,.5); }
   button.gold { background: linear-gradient(135deg,#f59e0b 0%,#fbbf24 100%); }
   button.cyan { background: linear-gradient(135deg,#0891b2 0%,#06b6d4 100%); }
-  input { width: 100%; background: rgba(10,12,20,.8); color: #e6e6e6; border: 1px solid #1e293b; padding: 13px; border-radius: 10px; font-size: 14px; font-family: 'Courier New', monospace; text-align: center; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; transition: all .2s; user-select: text; }
-  input:focus { outline: none; border-color: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,.15); }
-  .key-box { background: linear-gradient(135deg,rgba(15,17,23,.95),rgba(20,25,35,.95)); border: 1px solid rgba(74,222,128,.3); padding: 18px; border-radius: 12px; text-align: center; font-family: 'Courier New', monospace; font-size: 14px; word-break: break-all; margin: 16px 0; color: #4ade80; font-weight: 700; letter-spacing: 1px; user-select: text; }
+  input { width: 100%; background: rgba(10,12,20,.8); color: #e6e6e6; border: 1px solid #1e293b; padding: 13px; border-radius: 10px; font-size: 14px; font-family: 'Courier New', monospace; text-align: center; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; user-select: text; }
+  input:focus { outline: none; border-color: #4ade80; }
+  .key-box { background: rgba(15,17,23,.95); border: 1px solid rgba(74,222,128,.3); padding: 18px; border-radius: 12px; text-align: center; font-family: 'Courier New', monospace; font-size: 14px; word-break: break-all; margin: 16px 0; color: #4ade80; font-weight: 700; letter-spacing: 1px; user-select: text; }
   .countdown { text-align: center; font-size: 13px; color: #64748b; margin-top: 10px; letter-spacing: 1px; text-transform: uppercase; }
   .countdown .time { color: #fbbf24; font-weight: 800; font-size: 20px; display: block; margin-top: 4px; letter-spacing: 2px; }
   .step { display: none; }
@@ -32,25 +31,24 @@
   .success { text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 4px; margin-bottom: 6px; background: linear-gradient(135deg,#4ade80,#22d3ee); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .progress { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
   .dot { width: 10px; height: 10px; border-radius: 50%; background: #1e293b; transition: all .4s; }
-  .dot.done { background: #4ade80; box-shadow: 0 0 12px rgba(74,222,128,.6); }
-  .dot.current { background: #fbbf24; box-shadow: 0 0 16px #fbbf24; transform: scale(1.3); }
+  .dot.done { background: #4ade80; }
+  .dot.current { background: #fbbf24; transform: scale(1.3); }
   .hint { text-align: center; color: #4ade80; font-size: 11px; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; }
   .step-title { color: #93c5fd; font-size: 13px; margin: 8px 0 20px; text-align: center; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-  .adm-btn { position: absolute; top: 14px; left: 14px; width: 32px; height: 32px; border-radius: 50%; background: transparent; color: rgba(74,222,128,.15); border: 0; font-size: 16px; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; transition: all .4s; margin: 0; box-shadow: none; }
-  .adm-btn:hover { background: rgba(74,222,128,.1); color: #4ade80; transform: rotate(90deg); }
+  .adm-btn { position: absolute; top: 14px; left: 14px; width: 32px; height: 32px; border-radius: 50%; background: transparent; color: rgba(74,222,128,.15); border: 0; font-size: 16px; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; margin: 0; box-shadow: none; }
   .adm-title { color: #fbbf24; font-size: 18px; text-align: center; margin: 0 0 24px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
   .adm-label { color: #64748b; font-size: 11px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
   .adm-row { margin-bottom: 18px; }
   .days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-  .days-grid button { padding: 13px 8px; background: rgba(51,65,85,.4); margin: 0; font-size: 13px; border: 1px solid transparent; letter-spacing: 1px; box-shadow: none; }
-  .days-grid button.active { background: linear-gradient(135deg,#16a34a,#22c55e); border-color: #4ade80; box-shadow: 0 0 20px rgba(74,222,128,.4); }
-  .toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-100px); background: linear-gradient(135deg,#16a34a,#22c55e); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; font-weight: 700; box-shadow: 0 8px 30px rgba(22,163,74,.5); transition: transform .4s; z-index: 100; max-width: 90%; text-align: center; }
+  .days-grid button { padding: 13px 8px; background: rgba(51,65,85,.4); margin: 0; font-size: 13px; box-shadow: none; }
+  .days-grid button.active { background: linear-gradient(135deg,#16a34a,#22c55e); }
+  .toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-100px); background: linear-gradient(135deg,#16a34a,#22c55e); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; font-weight: 700; z-index: 100; max-width: 90%; text-align: center; transition: transform .4s; }
   .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.error { background: linear-gradient(135deg,#dc2626,#ef4444); }
   .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
   .stat { background: rgba(15,17,23,.6); border: 1px solid rgba(74,222,128,.1); border-radius: 10px; padding: 12px; text-align: center; }
   .stat-val { color: #4ade80; font-size: 20px; font-weight: 800; }
-  .stat-lbl { color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+  .stat-lbl { color: #64748b; font-size: 10px; text-transform: uppercase; margin-top: 4px; }
   .footer { text-align: center; color: #334155; font-size: 10px; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase; }
 </style>
 </head>
@@ -104,7 +102,7 @@
         <button onclick="setDays(30, this)">30 dias</button>
       </div>
     </div>
-    <div class="adm-row"><div class="adm-label">Duração Personalizada (dias)</div><input type="number" id="admDays" value="1" min="1" max="99999"></div>
+    <div class="adm-row"><div class="adm-label">Personalizado (dias)</div><input type="number" id="admDays" value="1" min="1" max="99999"></div>
     <button onclick="admGenerate()">🔑 GERAR KEY</button>
     <button class="gold" onclick="admPermanent()">⭐ KEY PERMANENTE</button>
     <button class="cyan" onclick="admTest()">🧪 KEY DE TESTE (10 SEG)</button>
@@ -119,25 +117,22 @@ const SECRET = 0x5A7B9C;
 const ADM_PASS = "infinity2011";
 const PHASES = 5;
 const WAIT_SEC = 5;
+const DEVICE_HASH = "FFFFFF";
 
 let countdownTimer = null;
 let admSelectedDays = 1;
 let statCount = 0;
 
-/* =====================================================
-   IMPORTANTE: o HTML usa device = "FFFFFF" sempre
-   (não trava em celular). O app valida o checksum
-   com base nisso também.
-   ===================================================== */
-const DEVICE_HASH = "FFFFFF";
-
 function buildKey(seconds) {
-  var dur36 = seconds.toString(36).toUpperCase();
-  var devHash = DEVICE_HASH;
-  var tmp = ((seconds % 100000) * 7919) + parseInt(devHash, 16);
+  var expirySec = Math.floor(Date.now() / 1000) + seconds;
+  var expiry36 = expirySec.toString(36).toUpperCase();
+  var tmp = ((expirySec % 100000) * 7919) + parseInt(DEVICE_HASH, 16);
   var check = (tmp ^ SECRET) & 0xFFFFFF;
   var checkHex = check.toString(16).toUpperCase().padStart(6, "0");
-  return { key: "INFINITY-MODZ-" + dur36 + "-" + devHash + "-" + checkHex };
+  return {
+    key: "INFINITY-MODZ-" + expiry36 + "-" + DEVICE_HASH + "-" + checkHex,
+    expirySec: expirySec
+  };
 }
 
 function showToast(msg, isError) {
@@ -167,7 +162,6 @@ function setupPhase(n) {
   var remaining = WAIT_SEC;
   btn.disabled = true;
   btn.textContent = "AGUARDE " + remaining + "s...";
-
   var interval = setInterval(function() {
     remaining--;
     if (remaining > 0) {
@@ -178,7 +172,6 @@ function setupPhase(n) {
       btn.textContent = n === PHASES ? "🎉 PEGAR MINHA KEY" : "CONTINUAR →";
     }
   }, 1000);
-
   btn.onclick = function() {
     if (btn.disabled) return;
     if (n === PHASES) revealKey();
@@ -208,7 +201,7 @@ function startCountdown(seconds) {
     var s = left % 60;
     el.textContent = String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
     if (left > 0) left--;
-    else { clearInterval(countdownTimer); el.textContent = "ATIVE NO APP"; }
+    else { clearInterval(countdownTimer); el.textContent = "EXPIRADA"; }
   }
   tick();
   countdownTimer = setInterval(tick, 1000);
