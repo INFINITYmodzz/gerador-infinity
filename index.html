@@ -9,452 +9,153 @@
   html, body { height: 100%; overflow-x: hidden; }
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #05060a;
-    color: #e6e6e6;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
+    background: #05060a; color: #e6e6e6; min-height: 100vh;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    position: relative; overflow: hidden;
   }
   body::before {
-    content: '';
-    position: fixed;
-    inset: -50%;
+    content: ''; position: fixed; inset: -50%;
     background:
       radial-gradient(circle at 20% 30%, rgba(74,222,128,.15), transparent 40%),
       radial-gradient(circle at 80% 70%, rgba(59,130,246,.12), transparent 40%),
       radial-gradient(circle at 50% 50%, rgba(168,85,247,.08), transparent 50%);
-    animation: bgMove 20s ease-in-out infinite;
-    z-index: 0;
+    animation: bgMove 20s ease-in-out infinite; z-index: 0;
   }
-  @keyframes bgMove {
-    0%, 100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(-3%, -3%) scale(1.05); }
-  }
+  @keyframes bgMove { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-3%,-3%) scale(1.05)} }
   .card {
-    background: rgba(20, 22, 32, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(74, 222, 128, 0.15);
-    border-radius: 20px;
-    padding: 32px 28px;
-    max-width: 440px;
-    width: 100%;
-    box-shadow:
-      0 20px 60px rgba(0,0,0,.6),
-      0 0 0 1px rgba(74,222,128,.05),
-      inset 0 1px 0 rgba(255,255,255,.05);
-    position: relative;
-    z-index: 1;
-    animation: cardIn .6s cubic-bezier(.2,.9,.3,1.2);
+    background: rgba(20,22,32,.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(74,222,128,.15); border-radius: 20px; padding: 32px 28px;
+    max-width: 440px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(74,222,128,.05), inset 0 1px 0 rgba(255,255,255,.05);
+    position: relative; z-index: 1; animation: cardIn .6s cubic-bezier(.2,.9,.3,1.2);
   }
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(30px) scale(.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  .logo { text-align: center; margin-bottom: 6px; position: relative; }
+  @keyframes cardIn { from{opacity:0;transform:translateY(30px) scale(.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+  .logo { text-align: center; margin-bottom: 6px; }
   .logo h1 {
-    font-size: 26px;
-    font-weight: 800;
-    letter-spacing: 3px;
+    font-size: 26px; font-weight: 800; letter-spacing: 3px;
     background: linear-gradient(135deg, #4ade80 0%, #22d3ee 50%, #a78bfa 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% 200%;
-    animation: gradientShift 4s ease infinite;
-    margin-bottom: 4px;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    background-size: 200% 200%; animation: gradientShift 4s ease infinite; margin-bottom: 4px;
   }
-  @keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-  }
-  .sub {
-    text-align: center;
-    color: #64748b;
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
+  @keyframes gradientShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+  .sub { text-align: center; color: #64748b; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
   button {
-    width: 100%;
-    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-    color: #fff;
-    border: 0;
-    padding: 15px;
-    border-radius: 12px;
-    font-size: 15px;
-    cursor: pointer;
-    font-weight: 700;
-    letter-spacing: .5px;
-    transition: all .3s cubic-bezier(.2,.9,.3,1.2);
-    margin-bottom: 10px;
+    width: 100%; background: linear-gradient(135deg,#16a34a 0%,#22c55e 100%); color: #fff; border: 0;
+    padding: 15px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 700;
+    letter-spacing: .5px; transition: all .3s cubic-bezier(.2,.9,.3,1.2); margin-bottom: 10px;
     box-shadow: 0 4px 15px rgba(22,163,74,.3), inset 0 1px 0 rgba(255,255,255,.15);
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
-  button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,.2) 50%, transparent 100%);
-    transform: translateX(-100%);
-    transition: transform .6s;
-  }
+  button::before { content:''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,.2) 50%, transparent 100%); transform: translateX(-100%); transition: transform .6s; }
   button:hover:not(:disabled)::before { transform: translateX(100%); }
-  button:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(22,163,74,.5), inset 0 1px 0 rgba(255,255,255,.2);
-  }
+  button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(22,163,74,.5); }
   button:active:not(:disabled) { transform: translateY(0) scale(.98); }
-  button:disabled {
-    background: #1e293b;
-    color: #475569;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  button.sec {
-    background: rgba(51, 65, 85, 0.5);
-    box-shadow: 0 2px 8px rgba(0,0,0,.3);
-  }
-  button.sec:hover:not(:disabled) {
-    background: rgba(71, 85, 105, 0.7);
-    box-shadow: 0 4px 15px rgba(0,0,0,.4);
-  }
-  button.gold {
-    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-    box-shadow: 0 4px 15px rgba(245,158,11,.3), inset 0 1px 0 rgba(255,255,255,.2);
-  }
+  button:disabled { background: #1e293b; color: #475569; cursor: not-allowed; box-shadow: none; }
+  button.sec { background: rgba(51,65,85,.5); box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  button.sec:hover:not(:disabled) { background: rgba(71,85,105,.7); }
+  button.gold { background: linear-gradient(135deg,#f59e0b 0%,#fbbf24 100%); box-shadow: 0 4px 15px rgba(245,158,11,.3); }
   button.gold:hover:not(:disabled) { box-shadow: 0 8px 25px rgba(245,158,11,.5); }
-  button.cyan {
-    background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-    box-shadow: 0 4px 15px rgba(8,145,178,.3), inset 0 1px 0 rgba(255,255,255,.15);
-  }
+  button.cyan { background: linear-gradient(135deg,#0891b2 0%,#06b6d4 100%); box-shadow: 0 4px 15px rgba(8,145,178,.3); }
   button.cyan:hover:not(:disabled) { box-shadow: 0 8px 25px rgba(8,145,178,.5); }
   input {
-    width: 100%;
-    background: rgba(10, 12, 20, 0.8);
-    color: #e6e6e6;
-    border: 1px solid #1e293b;
-    padding: 13px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-family: 'Courier New', monospace;
-    text-align: center;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    transition: all .2s;
-    user-select: text;
+    width: 100%; background: rgba(10,12,20,.8); color: #e6e6e6; border: 1px solid #1e293b;
+    padding: 13px; border-radius: 10px; font-size: 14px; font-family: 'Courier New', monospace;
+    text-align: center; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase;
+    transition: all .2s; user-select: text;
   }
-  input:focus {
-    outline: none;
-    border-color: #4ade80;
-    box-shadow: 0 0 0 3px rgba(74,222,128,.15);
-  }
+  input:focus { outline: none; border-color: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,.15); }
   .key-box {
-    background: linear-gradient(135deg, rgba(15,17,23,.95) 0%, rgba(20,25,35,.95) 100%);
-    border: 1px solid rgba(74,222,128,.3);
-    padding: 18px;
-    border-radius: 12px;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    word-break: break-all;
-    margin: 16px 0;
-    color: #4ade80;
-    font-weight: 700;
-    letter-spacing: 1px;
-    user-select: text;
+    background: linear-gradient(135deg,rgba(15,17,23,.95) 0%,rgba(20,25,35,.95) 100%);
+    border: 1px solid rgba(74,222,128,.3); padding: 18px; border-radius: 12px; text-align: center;
+    font-family: 'Courier New', monospace; font-size: 14px; word-break: break-all; margin: 16px 0;
+    color: #4ade80; font-weight: 700; letter-spacing: 1px; user-select: text;
     box-shadow: inset 0 1px 0 rgba(74,222,128,.1), 0 4px 20px rgba(74,222,128,.1);
     animation: glowPulse 2s ease-in-out infinite;
   }
-  @keyframes glowPulse {
-    0%, 100% { box-shadow: inset 0 1px 0 rgba(74,222,128,.1), 0 4px 20px rgba(74,222,128,.15); }
-    50% { box-shadow: inset 0 1px 0 rgba(74,222,128,.15), 0 4px 30px rgba(74,222,128,.3); }
-  }
-  .countdown {
-    text-align: center;
-    font-size: 13px;
-    color: #64748b;
-    margin-top: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .countdown .time {
-    color: #fbbf24;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    font-size: 20px;
-    display: block;
-    margin-top: 4px;
-    text-shadow: 0 0 20px rgba(251,191,36,.4);
-    letter-spacing: 2px;
-  }
+  @keyframes glowPulse { 0%,100%{box-shadow:inset 0 1px 0 rgba(74,222,128,.1),0 4px 20px rgba(74,222,128,.15)} 50%{box-shadow:inset 0 1px 0 rgba(74,222,128,.15),0 4px 30px rgba(74,222,128,.3)} }
+  .countdown { text-align: center; font-size: 13px; color: #64748b; margin-top: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .countdown .time { color: #fbbf24; font-weight: 800; font-variant-numeric: tabular-nums; font-size: 20px; display: block; margin-top: 4px; text-shadow: 0 0 20px rgba(251,191,36,.4); letter-spacing: 2px; }
   .step { display: none; }
   .step.active { display: block; animation: fadeIn .4s; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
   .success {
-    text-align: center;
-    font-size: 22px;
-    font-weight: 900;
-    letter-spacing: 4px;
-    margin-bottom: 6px;
-    background: linear-gradient(135deg, #4ade80, #22d3ee);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: bounceIn .8s cubic-bezier(.2,.9,.3,1.4);
+    text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 4px; margin-bottom: 6px;
+    background: linear-gradient(135deg,#4ade80,#22d3ee); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; animation: bounceIn .8s cubic-bezier(.2,.9,.3,1.4);
   }
-  @keyframes bounceIn {
-    0% { transform: scale(.3); opacity: 0; }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); opacity: 1; }
-  }
+  @keyframes bounceIn { 0%{transform:scale(.3);opacity:0} 50%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
   .progress { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #1e293b;
-    transition: all .4s cubic-bezier(.2,.9,.3,1.2);
-  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #1e293b; transition: all .4s cubic-bezier(.2,.9,.3,1.2); }
   .dot.done { background: #4ade80; box-shadow: 0 0 12px rgba(74,222,128,.6); }
-  .dot.current {
-    background: #fbbf24;
-    box-shadow: 0 0 16px #fbbf24;
-    transform: scale(1.3);
-    animation: dotPulse 1s ease-in-out infinite;
-  }
-  @keyframes dotPulse {
-    0%, 100% { transform: scale(1.3); }
-    50% { transform: scale(1.5); }
-  }
-  .hint {
-    text-align: center;
-    color: #4ade80;
-    font-size: 11px;
-    margin-bottom: 18px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .step-title {
-    color: #93c5fd;
-    font-size: 13px;
-    margin: 8px 0 20px;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-  }
-  .adm-btn {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: transparent;
-    color: rgba(74,222,128,.15);
-    border: 0;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all .4s;
-    margin: 0;
-    box-shadow: none;
-  }
+  .dot.current { background: #fbbf24; box-shadow: 0 0 16px #fbbf24; transform: scale(1.3); animation: dotPulse 1s ease-in-out infinite; }
+  @keyframes dotPulse { 0%,100%{transform:scale(1.3)} 50%{transform:scale(1.5)} }
+  .hint { text-align: center; color: #4ade80; font-size: 11px; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; }
+  .step-title { color: #93c5fd; font-size: 13px; margin: 8px 0 20px; text-align: center; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+  .adm-btn { position: absolute; top: 14px; left: 14px; width: 32px; height: 32px; border-radius: 50%; background: transparent; color: rgba(74,222,128,.15); border: 0; font-size: 16px; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; transition: all .4s; margin: 0; box-shadow: none; }
   .adm-btn::before { display: none; }
-  .adm-btn:hover {
-    background: rgba(74,222,128,.1);
-    color: #4ade80;
-    transform: rotate(90deg);
-    box-shadow: 0 0 20px rgba(74,222,128,.3);
-  }
-  .adm-title {
-    color: #fbbf24;
-    font-size: 18px;
-    text-align: center;
-    margin: 0 0 24px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(251,191,36,.3);
-  }
-  .adm-label {
-    color: #64748b;
-    font-size: 11px;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-  }
+  .adm-btn:hover { background: rgba(74,222,128,.1); color: #4ade80; transform: rotate(90deg); box-shadow: 0 0 20px rgba(74,222,128,.3); }
+  .adm-title { color: #fbbf24; font-size: 18px; text-align: center; margin: 0 0 24px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; text-shadow: 0 0 20px rgba(251,191,36,.3); }
+  .adm-label { color: #64748b; font-size: 11px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
   .adm-row { margin-bottom: 18px; }
   .days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-  .days-grid button {
-    padding: 13px 8px;
-    background: rgba(51,65,85,.4);
-    margin: 0;
-    font-size: 13px;
-    border: 1px solid transparent;
-    letter-spacing: 1px;
-    box-shadow: none;
-  }
-  .days-grid button:hover { background: rgba(71,85,105,.6); box-shadow: none; }
-  .days-grid button.active {
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-    border-color: #4ade80;
-    box-shadow: 0 0 20px rgba(74,222,128,.4);
-  }
-  .toast {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100px);
-    background: linear-gradient(135deg, #16a34a, #22c55e);
-    color: #fff;
-    padding: 14px 24px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: .5px;
-    box-shadow: 0 8px 30px rgba(22,163,74,.5);
-    transition: transform .4s cubic-bezier(.2,.9,.3,1.4);
-    z-index: 100;
-    max-width: 90%;
-    text-align: center;
-  }
+  .days-grid button { padding: 13px 8px; background: rgba(51,65,85,.4); margin: 0; font-size: 13px; border: 1px solid transparent; letter-spacing: 1px; box-shadow: none; }
+  .days-grid button:hover { background: rgba(71,85,105,.6); }
+  .days-grid button.active { background: linear-gradient(135deg,#16a34a,#22c55e); border-color: #4ade80; box-shadow: 0 0 20px rgba(74,222,128,.4); }
+  .toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-100px); background: linear-gradient(135deg,#16a34a,#22c55e); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; font-weight: 700; letter-spacing: .5px; box-shadow: 0 8px 30px rgba(22,163,74,.5); transition: transform .4s cubic-bezier(.2,.9,.3,1.4); z-index: 100; max-width: 90%; text-align: center; }
   .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast.error {
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-    box-shadow: 0 8px 30px rgba(220,38,38,.5);
-  }
-  .key-meta {
-    text-align: center;
-    color: #64748b;
-    font-size: 11px;
-    margin-top: 6px;
-    margin-bottom: 10px;
-    line-height: 1.5;
-    letter-spacing: .5px;
-  }
+  .toast.error { background: linear-gradient(135deg,#dc2626,#ef4444); box-shadow: 0 8px 30px rgba(220,38,38,.5); }
+  .key-meta { text-align: center; color: #64748b; font-size: 11px; margin-top: 6px; margin-bottom: 10px; line-height: 1.5; letter-spacing: .5px; }
   .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  .stat {
-    background: rgba(15,17,23,.6);
-    border: 1px solid rgba(74,222,128,.1);
-    border-radius: 10px;
-    padding: 12px;
-    text-align: center;
-  }
+  .stat { background: rgba(15,17,23,.6); border: 1px solid rgba(74,222,128,.1); border-radius: 10px; padding: 12px; text-align: center; }
   .stat-val { color: #4ade80; font-size: 20px; font-weight: 800; letter-spacing: 1px; }
-  .stat-lbl {
-    color: #64748b;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 4px;
-  }
-  .footer {
-    text-align: center;
-    color: #334155;
-    font-size: 10px;
-    margin-top: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  .stat-lbl { color: #64748b; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+  .footer { text-align: center; color: #334155; font-size: 10px; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase; }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: #0a0a0f; }
   ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 </style>
 </head>
 <body>
-
 <div class="toast" id="toast"></div>
 
 <div class="card">
   <button class="adm-btn" onclick="openAdmLogin()" title="">⚙</button>
 
   <div class="step active" id="step0">
-    <div class="logo">
-      <h1>INFINITY MODZ</h1>
-    </div>
+    <div class="logo"><h1>INFINITY MODZ</h1></div>
     <div class="sub">GERADOR PREMIUM</div>
     <div class="hint" id="deviceHint">✔ Pronto para gerar</div>
     <button onclick="startFlow()" id="startBtn">🔑 GERAR KEY GRÁTIS</button>
     <div class="footer">Powered by Infinity Modz</div>
   </div>
 
-  <div class="step" id="step1">
-    <div class="progress" id="progress1"></div>
-    <div class="step-title">FASE 1 DE 5</div>
-    <button id="btn1" disabled>AGUARDE...</button>
-  </div>
-  <div class="step" id="step2">
-    <div class="progress" id="progress2"></div>
-    <div class="step-title">FASE 2 DE 5</div>
-    <button id="btn2" disabled>AGUARDE...</button>
-  </div>
-  <div class="step" id="step3">
-    <div class="progress" id="progress3"></div>
-    <div class="step-title">FASE 3 DE 5</div>
-    <button id="btn3" disabled>AGUARDE...</button>
-  </div>
-  <div class="step" id="step4">
-    <div class="progress" id="progress4"></div>
-    <div class="step-title">FASE 4 DE 5</div>
-    <button id="btn4" disabled>AGUARDE...</button>
-  </div>
-  <div class="step" id="step5">
-    <div class="progress" id="progress5"></div>
-    <div class="step-title">FASE 5 DE 5</div>
-    <button id="btn5" disabled>AGUARDE...</button>
-  </div>
+  <div class="step" id="step1"><div class="progress" id="progress1"></div><div class="step-title">FASE 1 DE 5</div><button id="btn1" disabled>AGUARDE...</button></div>
+  <div class="step" id="step2"><div class="progress" id="progress2"></div><div class="step-title">FASE 2 DE 5</div><button id="btn2" disabled>AGUARDE...</button></div>
+  <div class="step" id="step3"><div class="progress" id="progress3"></div><div class="step-title">FASE 3 DE 5</div><button id="btn3" disabled>AGUARDE...</button></div>
+  <div class="step" id="step4"><div class="progress" id="progress4"></div><div class="step-title">FASE 4 DE 5</div><button id="btn4" disabled>AGUARDE...</button></div>
+  <div class="step" id="step5"><div class="progress" id="progress5"></div><div class="step-title">FASE 5 DE 5</div><button id="btn5" disabled>AGUARDE...</button></div>
 
   <div class="step" id="stepDone">
     <div class="success">🎉 CONGRATULATIONS!</div>
     <div class="sub">SUA KEY FOI GERADA</div>
     <div class="key-box" id="keyOut">-</div>
     <button class="sec" onclick="copyKey('keyOut', this)">📋 COPIAR KEY</button>
-    <div class="countdown">
-      Expira em
-      <span class="time" id="countdown">24:00:00</span>
-    </div>
+    <div class="countdown">Expira em <span class="time" id="countdown">24:00:00</span></div>
   </div>
 
   <div class="step" id="stepAdmLogin">
     <div class="adm-title">🔒 Acesso Restrito</div>
-    <div class="adm-row">
-      <div class="adm-label">Senha de Administrador</div>
-      <input type="password" id="admPass" placeholder="••••••••" autocomplete="off">
-    </div>
+    <div class="adm-row"><div class="adm-label">Senha de Administrador</div><input type="password" id="admPass" placeholder="••••••••" autocomplete="off"></div>
     <button onclick="checkAdmPass()">ENTRAR</button>
     <button class="sec" onclick="showStep('step0')">VOLTAR</button>
   </div>
 
   <div class="step" id="stepAdmPanel">
     <div class="adm-title">⚙ Painel ADM</div>
-
     <div class="stats">
-      <div class="stat">
-        <div class="stat-val" id="statTotal">0</div>
-        <div class="stat-lbl">Keys Geradas</div>
-      </div>
-      <div class="stat">
-        <div class="stat-val" id="statMode">1d</div>
-        <div class="stat-lbl">Modo Atual</div>
-      </div>
+      <div class="stat"><div class="stat-val" id="statTotal">0</div><div class="stat-lbl">Keys Geradas</div></div>
+      <div class="stat"><div class="stat-val" id="statMode">1d</div><div class="stat-lbl">Modo Atual</div></div>
     </div>
-
     <div class="adm-row">
       <div class="adm-label">Duração Rápida</div>
       <div class="days-grid">
@@ -464,25 +165,14 @@
         <button onclick="setDays(30, this)">30 dias</button>
       </div>
     </div>
-
-    <div class="adm-row">
-      <div class="adm-label">Duração Personalizada (dias)</div>
-      <input type="number" id="admDays" value="1" min="1" max="99999">
-    </div>
-
-    <div class="adm-row">
-      <div class="adm-label">Travar em um Dispositivo?</div>
-      <input type="text" id="admDevice" placeholder="VAZIO = QUALQUER" maxlength="16">
-    </div>
-
+    <div class="adm-row"><div class="adm-label">Duração Personalizada (dias)</div><input type="number" id="admDays" value="1" min="1" max="99999"></div>
+    <div class="adm-row"><div class="adm-label">Travar em um Dispositivo?</div><input type="text" id="admDevice" placeholder="VAZIO = QUALQUER" maxlength="16"></div>
     <button onclick="admGenerate()">🔑 GERAR KEY</button>
     <button class="gold" onclick="admPermanent()">⭐ GERAR KEY PERMANENTE</button>
-    <button class="cyan" onclick="admTest()">🧪 KEY DE TESTE (1 SEG)</button>
-
+    <button class="cyan" onclick="admTest()">🧪 KEY DE TESTE (10 SEG)</button>
     <div class="key-box" id="admKeyOut" style="display:none;">-</div>
     <div class="key-meta" id="admKeyMeta"></div>
     <button class="sec" id="admCopyBtn" style="display:none;" onclick="copyKey('admKeyOut', this)">📋 COPIAR</button>
-
     <button class="sec" onclick="showStep('step0')">VOLTAR AO INÍCIO</button>
   </div>
 </div>
@@ -515,16 +205,16 @@ function hashDevice(device) {
   return h.toString(16).toUpperCase().padStart(6, "0");
 }
 
+/* Duração em segundos fica DENTRO da key.
+   Quem decide quando expira é o app (a partir do 1º login). */
 function buildKey(device, seconds) {
-  var expirySec = Math.floor(Date.now() / 1000) + seconds;
-  var expiry36 = expirySec.toString(36).toUpperCase();
+  var dur36 = seconds.toString(36).toUpperCase();
   var devHash = hashDevice(device);
-  var tmp = ((expirySec % 100000) * 7919) + parseInt(devHash, 16);
+  var tmp = ((seconds % 100000) * 7919) + parseInt(devHash, 16);
   var check = (tmp ^ SECRET) & 0xFFFFFF;
   var checkHex = check.toString(16).toUpperCase().padStart(6, "0");
   return {
-    key: "INFINITY-MODZ-" + expiry36 + "-" + devHash + "-" + checkHex,
-    expirySec: expirySec
+    key: "INFINITY-MODZ-" + dur36 + "-" + devHash + "-" + checkHex
   };
 }
 
@@ -574,32 +264,29 @@ function setupPhase(n) {
   };
 }
 
-function startFlow() {
-  showStep("step1");
-  setupPhase(1);
-}
+function startFlow() { showStep("step1"); setupPhase(1); }
 
 function revealKey() {
   var r = buildKey(userDevice, 86400);
   document.getElementById("keyOut").textContent = r.key;
   showStep("stepDone");
-  startCountdown(r.expirySec);
+  startCountdown(86400);
   statCount++;
   document.getElementById("statTotal").textContent = statCount;
 }
 
-function startCountdown(expirySec) {
+function startCountdown(seconds) {
   var el = document.getElementById("countdown");
   if (countdownTimer) clearInterval(countdownTimer);
+  var left = seconds;
   function tick() {
-    var now = Math.floor(Date.now() / 1000);
-    var left = expirySec - now;
     if (left < 0) left = 0;
     var h = Math.floor(left / 3600);
     var m = Math.floor((left % 3600) / 60);
     var s = left % 60;
     el.textContent = String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
-    if (left === 0) { clearInterval(countdownTimer); el.textContent = "EXPIRADA"; }
+    if (left > 0) left--;
+    else { clearInterval(countdownTimer); el.textContent = "ATIVE NO APP"; }
   }
   tick();
   countdownTimer = setInterval(tick, 1000);
@@ -655,8 +342,7 @@ function _admGenWithSeconds(seconds, label) {
   keyBox.style.display = "block";
   copyBtn.style.display = "block";
 
-  var exp = new Date(r.expirySec * 1000).toLocaleString("pt-BR");
-  meta.textContent = (dev ? "🔒 Travada no device " + dev : "🔓 Qualquer celular") + " • " + label + " • Expira: " + exp;
+  meta.textContent = (dev ? "🔒 Travada no device " + dev : "🔓 Qualquer celular") + " • " + label + " • Conta a partir do 1º login";
   showToast(label + " gerada!");
   statCount++;
   document.getElementById("statTotal").textContent = statCount;
@@ -674,7 +360,7 @@ function admPermanent() {
 }
 
 function admTest() {
-  _admGenWithSeconds(1, "Key de TESTE");
+  _admGenWithSeconds(10, "Key de TESTE (10 seg)");
 }
 </script>
 </body>
