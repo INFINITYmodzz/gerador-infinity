@@ -2,201 +2,297 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>INFINITY MODZ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Keys Premium</title>
 <style>
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #05060a; color: #e6e6e6; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .card { background: rgba(20,22,32,.85); border: 1px solid rgba(74,222,128,.15); border-radius: 20px; padding: 32px 28px; max-width: 440px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.6); position: relative; }
-  .logo h1 { font-size: 26px; font-weight: 800; letter-spacing: 3px; background: linear-gradient(135deg,#4ade80 0%,#22d3ee 50%,#a78bfa 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 6px; }
-  .sub { text-align: center; color: #64748b; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
-  button { width: 100%; background: linear-gradient(135deg,#16a34a 0%,#22c55e 100%); color: #fff; border: 0; padding: 15px; border-radius: 12px; font-size: 15px; cursor: pointer; font-weight: 700; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(22,163,74,.3); }
-  button:disabled { background: #1e293b; color: #475569; box-shadow: none; cursor: not-allowed; }
-  button.sec { background: rgba(51,65,85,.5); }
-  button.gold { background: linear-gradient(135deg,#f59e0b 0%,#fbbf24 100%); }
-  button.cyan { background: linear-gradient(135deg,#0891b2 0%,#06b6d4 100%); }
-  input { width: 100%; background: rgba(10,12,20,.8); color: #e6e6e6; border: 1px solid #1e293b; padding: 13px; border-radius: 10px; font-size: 14px; font-family: 'Courier New', monospace; text-align: center; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; user-select: text; }
-  .key-box { background: rgba(15,17,23,.95); border: 1px solid rgba(74,222,128,.3); padding: 18px; border-radius: 12px; text-align: center; font-family: 'Courier New', monospace; font-size: 15px; word-break: break-all; margin: 16px 0; color: #4ade80; font-weight: 700; letter-spacing: 2px; user-select: text; }
-  .step { display: none; }
-  .step.active { display: block; }
-  .success { text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 4px; margin-bottom: 6px; background: linear-gradient(135deg,#4ade80,#22d3ee); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-  .progress { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
-  .dot { width: 10px; height: 10px; border-radius: 50%; background: #1e293b; }
-  .dot.done { background: #4ade80; }
-  .dot.current { background: #fbbf24; transform: scale(1.3); }
-  .hint { text-align: center; color: #4ade80; font-size: 11px; margin-bottom: 18px; letter-spacing: 1px; text-transform: uppercase; }
-  .step-title { color: #93c5fd; font-size: 13px; margin: 8px 0 20px; text-align: center; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
-  .adm-btn { position: absolute; top: 14px; left: 14px; width: 32px; height: 32px; border-radius: 50%; background: transparent; color: rgba(74,222,128,.15); border: 0; font-size: 16px; cursor: pointer; padding: 0; display: flex; align-items: center; justify-content: center; }
-  .adm-title { color: #fbbf24; font-size: 18px; text-align: center; margin: 0 0 24px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; }
-  .adm-label { color: #64748b; font-size: 11px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-  .adm-row { margin-bottom: 18px; }
-  .toast { position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-100px); background: linear-gradient(135deg,#16a34a,#22c55e); color: #fff; padding: 14px 24px; border-radius: 12px; font-size: 14px; font-weight: 700; z-index: 100; transition: transform .4s; }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast.error { background: linear-gradient(135deg,#dc2626,#ef4444); }
-  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  .stat { background: rgba(15,17,23,.6); border: 1px solid rgba(74,222,128,.1); border-radius: 10px; padding: 12px; text-align: center; }
-  .stat-val { color: #4ade80; font-size: 20px; font-weight: 800; }
-  .stat-lbl { color: #64748b; font-size: 10px; text-transform: uppercase; margin-top: 4px; }
-  .footer { text-align: center; color: #334155; font-size: 10px; margin-top: 20px; letter-spacing: 2px; text-transform: uppercase; }
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+  body {
+    background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    padding:20px; color:#fff;
+  }
+  .container {
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(15px);
+    border:1px solid rgba(255,255,255,0.1); border-radius:20px;
+    padding:40px; width:100%; max-width:650px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  header { text-align:center; margin-bottom:30px; }
+  header h1 {
+    font-size:28px;
+    background:linear-gradient(90deg,#00d2ff,#3a7bd5);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    margin-bottom:8px;
+  }
+  .subtitle { color:#aaa; font-size:14px; }
+
+  .progress-bar {
+    width:100%; height:6px; background:rgba(255,255,255,0.1);
+    border-radius:10px; overflow:hidden; margin-bottom:25px;
+  }
+  .progress-fill {
+    height:100%; width:25%;
+    background:linear-gradient(90deg,#00d2ff,#3a7bd5);
+    border-radius:10px; transition:width .5s ease;
+  }
+
+  .steps { display:flex; justify-content:space-between; margin-bottom:35px; }
+  .step { text-align:center; flex:1; opacity:.4; transition:.3s; }
+  .step.active, .step.done { opacity:1; }
+  .step span {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:36px; height:36px; border-radius:50%;
+    background:rgba(255,255,255,0.1); font-weight:bold;
+    margin-bottom:6px; transition:.3s;
+  }
+  .step.active span {
+    background:linear-gradient(135deg,#00d2ff,#3a7bd5);
+    box-shadow:0 0 15px rgba(0,210,255,0.6);
+  }
+  .step.done span { background:#22c55e; }
+  .step p { font-size:12px; color:#ccc; }
+
+  .content { min-height:200px; display:flex; align-items:center; justify-content:center; }
+  .etapa { text-align:center; animation:fadeIn .4s ease; width:100%; }
+  .etapa h2 { font-size:20px; margin-bottom:12px; color:#00d2ff; }
+  .etapa p { color:#bbb; margin-bottom:20px; line-height:1.6; }
+  .hidden { display:none; }
+
+  .btn {
+    padding:12px 28px; border:none; border-radius:10px;
+    font-size:15px; font-weight:600; cursor:pointer;
+    transition:.3s; margin:6px;
+  }
+  .btn.primary {
+    background:linear-gradient(135deg,#00d2ff,#3a7bd5);
+    color:#fff; box-shadow:0 8px 20px rgba(0,210,255,0.3);
+  }
+  .btn.primary:hover { transform:translateY(-2px); box-shadow:0 12px 25px rgba(0,210,255,0.5); }
+  .btn.secondary {
+    background:rgba(255,255,255,0.1); color:#fff;
+    border:1px solid rgba(255,255,255,0.2);
+  }
+  .btn.secondary:hover { background:rgba(255,255,255,0.2); }
+  .btn.copy { background:#22c55e; color:#fff; padding:8px 16px; font-size:13px; }
+
+  .key-box {
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:rgba(0,0,0,0.4); border:2px dashed #00d2ff;
+    border-radius:12px; padding:18px; margin:20px 0; flex-wrap:wrap;
+  }
+  .key-box code {
+    font-family:'Courier New',monospace; font-size:18px;
+    letter-spacing:2px; color:#00ff9d; font-weight:bold;
+  }
+
+  .loader {
+    width:50px; height:50px; border:4px solid rgba(255,255,255,0.1);
+    border-top-color:#00d2ff; border-radius:50%;
+    animation:spin 1s linear infinite; margin:20px auto;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  @keyframes fadeIn {
+    from { opacity:0; transform:translateY(10px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  footer { text-align:center; margin-top:30px; font-size:12px; color:#666; }
 </style>
 </head>
 <body>
-<div class="toast" id="toast"></div>
 
-<div class="card">
-  <button class="adm-btn" onclick="openAdmLogin()">⚙</button>
+<div class="container">
+  <header>
+    <h1>🔐 Gerador de Keys</h1>
+    <p class="subtitle">Complete as 4 etapas para gerar sua key</p>
+  </header>
 
-  <div class="step active" id="step0">
-    <div class="logo"><h1>INFINITY MODZ</h1></div>
-    <div class="sub">GERADOR PREMIUM</div>
-    <div class="hint">✔ Pronto para gerar</div>
-    <button onclick="startFlow()">🔑 GERAR KEY GRÁTIS</button>
-    <div class="footer">Powered by Infinity Modz</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
   </div>
 
-  <div class="step" id="step1"><div class="progress" id="progress1"></div><div class="step-title">FASE 1 DE 5</div><button id="btn1" disabled>AGUARDE...</button></div>
-  <div class="step" id="step2"><div class="progress" id="progress2"></div><div class="step-title">FASE 2 DE 5</div><button id="btn2" disabled>AGUARDE...</button></div>
-  <div class="step" id="step3"><div class="progress" id="progress3"></div><div class="step-title">FASE 3 DE 5</div><button id="btn3" disabled>AGUARDE...</button></div>
-  <div class="step" id="step4"><div class="progress" id="progress4"></div><div class="step-title">FASE 4 DE 5</div><button id="btn4" disabled>AGUARDE...</button></div>
-  <div class="step" id="step5"><div class="progress" id="progress5"></div><div class="step-title">FASE 5 DE 5</div><button id="btn5" disabled>AGUARDE...</button></div>
-
-  <div class="step" id="stepDone">
-    <div class="success">🎉 CONGRATULATIONS!</div>
-    <div class="sub">SUA KEY FOI GERADA</div>
-    <div class="key-box" id="keyOut">-</div>
-    <button class="sec" onclick="copyKey('keyOut', this)">📋 COPIAR KEY</button>
+  <div class="steps">
+    <div class="step active" data-step="1"><span>1</span><p>Início</p></div>
+    <div class="step" data-step="2"><span>2</span><p>Encurtador</p></div>
+    <div class="step" data-step="3"><span>3</span><p>Validação</p></div>
+    <div class="step" data-step="4"><span>4</span><p>Key</p></div>
   </div>
 
-  <div class="step" id="stepAdmLogin">
-    <div class="adm-title">🔒 Acesso Restrito</div>
-    <div class="adm-row"><div class="adm-label">Senha</div><input type="password" id="admPass" placeholder="••••••••"></div>
-    <button onclick="checkAdmPass()">ENTRAR</button>
-    <button class="sec" onclick="showStep('step0')">VOLTAR</button>
-  </div>
+  <main class="content">
+    <section class="etapa" id="etapa1">
+      <h2>Etapa 1 — Verificação</h2>
+      <p>Clique abaixo para iniciar o processo de geração.</p>
+      <button class="btn primary" onclick="iniciarProcesso()">Iniciar</button>
+    </section>
 
-  <div class="step" id="stepAdmPanel">
-    <div class="adm-title">⚙ Painel ADM</div>
-    <div class="stats">
-      <div class="stat"><div class="stat-val" id="statTotal">0</div><div class="stat-lbl">Keys Geradas</div></div>
-      <div class="stat"><div class="stat-val">LIVRE</div><div class="stat-lbl">Modo</div></div>
-    </div>
-    <button onclick="admGenerate()">🔑 GERAR KEY</button>
-    <div class="key-box" id="admKeyOut" style="display:none;">-</div>
-    <button class="sec" id="admCopyBtn" style="display:none;" onclick="copyKey('admKeyOut', this)">📋 COPIAR</button>
-    <button class="sec" onclick="showStep('step0')">VOLTAR AO INÍCIO</button>
-  </div>
+    <section class="etapa hidden" id="etapa2">
+      <h2>Etapa 2 — Encurtador</h2>
+      <p>Você será redirecionado para o encurtador.<br>Após concluir, volte aqui e clique em "Já concluí".</p>
+      <button class="btn primary" onclick="abrirEncurtador()">Abrir Encurtador</button>
+      <button class="btn secondary" onclick="verificarRetorno()">Já concluí</button>
+    </section>
+
+    <section class="etapa hidden" id="etapa3">
+      <h2>Etapa 3 — Validação</h2>
+      <p class="loading-text">Verificando token...</p>
+      <div class="loader"></div>
+    </section>
+
+    <section class="etapa hidden" id="etapa4">
+      <h2>Etapa 4 — Sua Key</h2>
+      <p>Parabéns! Aqui está sua key:</p>
+      <div class="key-box">
+        <code id="keyGerada">XXXX-XXXX-XXXX-XXXX</code>
+        <button class="btn copy" onclick="copiarKey(event)">📋 Copiar</button>
+      </div>
+      <button class="btn secondary" onclick="location.reload()">Gerar Novamente</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 KeyGen System — Todos os direitos reservados</p>
+  </footer>
 </div>
 
 <script>
-const ADM_PASS = "infinity2011";
-const PHASES = 5;
-const WAIT_SEC = 5;
+// ==========================================
+// CONFIGURAÇÕES
+// ==========================================
+const CONFIG = {
+  // 🔧 COLOQUE AQUI SEU LINK DE ENCURTADOR REAL
+  // Exemplo ShrinkMe: https://shrinkme.io/st?api=SEU_TOKEN&url=https://seusite.com
+  encurtadorURL: "https://example.com/seu-encurtador",
 
-let statCount = 0;
+  // Tempo mínimo (em segundos) que o usuário deve aguardar
+  tempoMinimoEncurtador: 10,
 
-function genNumbers(len) {
-  var s = "";
-  for (var i = 0; i < len; i++) s += Math.floor(Math.random() * 10);
-  return s;
-}
+  // Prefixo das keys
+  prefixoKey: "KEY"
+};
 
-function buildKey() {
-  return "INFINITY-MODZ-" + genNumbers(8);
-}
+// ==========================================
+// ESTADO
+// ==========================================
+const state = {
+  etapaAtual: 1,
+  timestampIda: null,
+  tokenValido: false
+};
 
-function showToast(msg, isError) {
-  var t = document.getElementById("toast");
-  t.textContent = msg;
-  t.className = "toast show" + (isError ? " error" : "");
-  setTimeout(function() { t.className = "toast"; }, 2200);
-}
+// ==========================================
+// NAVEGAÇÃO ENTRE ETAPAS
+// ==========================================
+function irParaEtapa(numero) {
+  state.etapaAtual = numero;
 
-function renderProgress(el, phase) {
-  var html = "";
-  for (var i = 1; i <= PHASES; i++) {
-    var cls = i < phase ? "done" : i === phase ? "current" : "";
-    html += '<div class="dot ' + cls + '"></div>';
-  }
-  el.innerHTML = html;
-}
+  document.querySelectorAll('.etapa').forEach(el => el.classList.add('hidden'));
+  document.getElementById(`etapa${numero}`).classList.remove('hidden');
 
-function showStep(id) {
-  document.querySelectorAll(".step").forEach(function(s) { s.classList.remove("active"); });
-  document.getElementById(id).classList.add("active");
-}
+  const progresso = (numero / 4) * 100;
+  document.getElementById('progressFill').style.width = progresso + '%';
 
-function setupPhase(n) {
-  renderProgress(document.getElementById("progress" + n), n);
-  var btn = document.getElementById("btn" + n);
-  var remaining = WAIT_SEC;
-  btn.disabled = true;
-  btn.textContent = "AGUARDE " + remaining + "s...";
-  var interval = setInterval(function() {
-    remaining--;
-    if (remaining > 0) {
-      btn.textContent = "AGUARDE " + remaining + "s...";
-    } else {
-      clearInterval(interval);
-      btn.disabled = false;
-      btn.textContent = n === PHASES ? "🎉 PEGAR MINHA KEY" : "CONTINUAR →";
-    }
-  }, 1000);
-  btn.onclick = function() {
-    if (btn.disabled) return;
-    if (n === PHASES) revealKey();
-    else { showStep("step" + (n + 1)); setupPhase(n + 1); }
-  };
-}
-
-function startFlow() { showStep("step1"); setupPhase(1); }
-
-function revealKey() {
-  var k = buildKey();
-  document.getElementById("keyOut").textContent = k;
-  showStep("stepDone");
-  statCount++;
-  document.getElementById("statTotal").textContent = statCount;
-}
-
-function copyKey(elId, btn) {
-  var key = document.getElementById(elId).textContent;
-  if (!key || key === "-") return;
-  navigator.clipboard.writeText(key).then(function() {
-    var orig = btn.textContent;
-    btn.textContent = "✔ COPIADO!";
-    setTimeout(function() { btn.textContent = orig; }, 1500);
-    showToast("Key copiada!");
+  document.querySelectorAll('.step').forEach(step => {
+    const n = parseInt(step.dataset.step);
+    step.classList.remove('active', 'done');
+    if (n < numero) step.classList.add('done');
+    if (n === numero) step.classList.add('active');
   });
 }
 
-function openAdmLogin() {
-  document.getElementById("admPass").value = "";
-  showStep("stepAdmLogin");
+// ==========================================
+// ETAPA 1 → Iniciar
+// ==========================================
+function iniciarProcesso() {
+  irParaEtapa(2);
 }
 
-function checkAdmPass() {
-  var p = document.getElementById("admPass").value;
-  if (p === ADM_PASS) {
-    document.getElementById("admKeyOut").style.display = "none";
-    document.getElementById("admCopyBtn").style.display = "none";
-    showStep("stepAdmPanel");
-    showToast("Bem-vindo, ADM!");
+// ==========================================
+// ETAPA 2 → Abrir Encurtador
+// ==========================================
+function abrirEncurtador() {
+  state.timestampIda = Date.now();
+  localStorage.setItem('keygen_timestamp', state.timestampIda);
+  window.open(CONFIG.encurtadorURL, '_blank');
+}
+
+// ==========================================
+// ETAPA 2 → Verificar Retorno
+// ==========================================
+function verificarRetorno() {
+  const timestampSalvo = parseInt(localStorage.getItem('keygen_timestamp') || '0');
+  const diferencaSegundos = (Date.now() - timestampSalvo) / 1000;
+
+  if (!timestampSalvo || diferencaSegundos < CONFIG.tempoMinimoEncurtador) {
+    const faltam = Math.ceil(CONFIG.tempoMinimoEncurtador - diferencaSegundos);
+    alert(`⚠️ Aguarde pelo menos ${CONFIG.tempoMinimoEncurtador}s no encurtador!\nFaltam: ${faltam}s`);
+    return;
+  }
+
+  irParaEtapa(3);
+  setTimeout(validarToken, 2000);
+}
+
+// ==========================================
+// ETAPA 3 → Validação
+// ==========================================
+function validarToken() {
+  const timestampSalvo = parseInt(localStorage.getItem('keygen_timestamp') || '0');
+  const diferencaSegundos = (Date.now() - timestampSalvo) / 1000;
+
+  if (diferencaSegundos >= CONFIG.tempoMinimoEncurtador) {
+    state.tokenValido = true;
+    irParaEtapa(4);
+    gerarKey();
   } else {
-    showToast("Senha incorreta", true);
+    alert('❌ Validação falhou. Tente novamente.');
+    irParaEtapa(1);
   }
 }
 
-function admGenerate() {
-  var k = buildKey();
-  var keyBox = document.getElementById("admKeyOut");
-  var copyBtn = document.getElementById("admCopyBtn");
-  keyBox.textContent = k;
-  keyBox.style.display = "block";
-  copyBtn.style.display = "block";
-  showToast("Key gerada!");
-  statCount++;
-  document.getElementById("statTotal").textContent = statCount;
+// ==========================================
+// ETAPA 4 → Gerar Key
+// ==========================================
+function gerarKey() {
+  const key = gerarKeyAleatoria();
+  document.getElementById('keyGerada').textContent = key;
+
+  const historico = JSON.parse(localStorage.getItem('keygen_historico') || '[]');
+  historico.push({ key, data: new Date().toISOString() });
+  localStorage.setItem('keygen_historico', JSON.stringify(historico));
 }
+
+function gerarKeyAleatoria() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  const blocos = [];
+  for (let i = 0; i < 4; i++) {
+    let bloco = '';
+    for (let j = 0; j < 4; j++) {
+      bloco += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    blocos.push(bloco);
+  }
+  return `${CONFIG.prefixoKey}-${blocos.join('-')}`;
+}
+
+// ==========================================
+// COPIAR KEY
+// ==========================================
+function copiarKey(event) {
+  const key = document.getElementById('keyGerada').textContent;
+  navigator.clipboard.writeText(key).then(() => {
+    const btn = event.target;
+    const original = btn.textContent;
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => btn.textContent = original, 1500);
+  });
+}
+
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+window.addEventListener('DOMContentLoaded', () => {
+  irParaEtapa(1);
+});
 </script>
+
 </body>
 </html>
