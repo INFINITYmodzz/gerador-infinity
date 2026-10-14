@@ -3,296 +3,389 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerador de Keys Premium</title>
+<meta name="theme-color" content="#080b12">
+<meta name="description" content="INFINITY MODZ — central de acesso e geração de key.">
+<title>INFINITY MODZ | Key Access</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
+  :root {
+    --bg: #080b12;
+    --panel: rgba(17, 23, 38, .88);
+    --panel-2: rgba(255,255,255,.045);
+    --line: rgba(255,255,255,.10);
+    --text: #f4f7ff;
+    --muted: #8f9ab3;
+    --cyan: #36e4ff;
+    --violet: #8e5bff;
+    --green: #43f3ae;
+    --danger: #ff6b86;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    background: linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-    min-height:100vh; display:flex; align-items:center; justify-content:center;
-    padding:20px; color:#fff;
+    min-height: 100vh; padding: 28px 16px; display: grid; place-items: center;
+    color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(ellipse at 13% 12%, rgba(54,228,255,.13), transparent 34%),
+      radial-gradient(ellipse at 86% 82%, rgba(142,91,255,.17), transparent 38%),
+      var(--bg);
+    overflow-x: hidden;
   }
-  .container {
-    background: rgba(255,255,255,0.05); backdrop-filter: blur(15px);
-    border:1px solid rgba(255,255,255,0.1); border-radius:20px;
-    padding:40px; width:100%; max-width:650px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none; opacity: .15;
+    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 36px 36px; mask-image: linear-gradient(to bottom, black, transparent 90%);
   }
-  header { text-align:center; margin-bottom:30px; }
-  header h1 {
-    font-size:28px;
-    background:linear-gradient(90deg,#00d2ff,#3a7bd5);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    margin-bottom:8px;
+  button { font: inherit; }
+  .app { position: relative; width: min(100%, 720px); }
+  .topline { display:flex; align-items:center; justify-content:space-between; gap:12px; margin: 0 4px 16px; }
+  .brand { display:flex; align-items:center; gap:10px; letter-spacing: .12em; font-size: 12px; font-weight: 850; }
+  .brand-mark { position:relative; display:grid; place-items:center; width:42px; height:42px; overflow:hidden; border:1px solid rgba(54,228,255,.48); border-radius:13px; background:linear-gradient(135deg,rgba(54,228,255,.16),rgba(142,91,255,.2)); color:var(--cyan); font-size:24px; box-shadow:0 0 24px rgba(54,228,255,.10); cursor:pointer; flex:0 0 auto; }
+  .brand-mark img { width:100%; height:100%; object-fit:cover; display:none; }
+  .brand-mark.has-photo img { display:block; }
+  .brand-mark.has-photo .default-mark { display:none; }
+  .logo-hint { display:block; font-size:8px; letter-spacing:0; color:#71809b; font-weight:500; margin-top:3px; }
+  .robot-check { width:min(100%,360px); display:flex; align-items:center; justify-content:space-between; gap:14px; padding:16px; margin-top:22px; border:1px solid rgba(255,255,255,.15); border-radius:12px; background:#fff; color:#222; text-align:left; box-shadow:0 8px 28px #0002; }
+  .robot-left { display:flex; align-items:center; gap:12px; font-size:14px; color:#222; }
+  .robot-left input { width:25px; height:25px; accent-color:#1685d1; cursor:pointer; }
+  .robot-brand { font-size:10px; line-height:1.5; color:#555; text-align:center; }
+  .robot-brand strong { display:block; font-size:21px; color:#1685d1; }
+  .robot-note { margin-top:10px; font-size:10px; color:#8792a8; line-height:1.6; }
+  .status { display:flex; align-items:center; gap:7px; color:#b9c5d9; text-transform:uppercase; font-size:10px; letter-spacing:.13em; }
+  .status-dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 12px var(--green); }
+  .panel { position:relative; padding:clamp(22px, 5vw, 42px); border:1px solid var(--line); border-radius:26px; background:linear-gradient(145deg, rgba(19,26,43,.94), rgba(10,14,24,.96)); box-shadow:0 28px 90px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.045); overflow:hidden; }
+  .panel::before { content:""; position:absolute; left:14%; right:14%; top:-1px; height:1px; background:linear-gradient(90deg,transparent,var(--cyan),var(--violet),transparent); opacity:.85; }
+  .hero { text-align:center; margin-bottom:29px; }
+  .eyebrow { display:inline-flex; align-items:center; gap:7px; padding:7px 11px; border:1px solid rgba(54,228,255,.18); border-radius:999px; color:var(--cyan); background:rgba(54,228,255,.055); font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:16px; }
+  .eyebrow svg { width:13px; height:13px; }
+  h1 { font-size:clamp(26px, 5vw, 38px); line-height:1.12; letter-spacing:-.045em; font-weight:900; }
+  h1 .gradient { color:var(--cyan); background:linear-gradient(90deg,var(--cyan),#9b8bff); background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .subtitle { max-width:450px; margin:12px auto 0; color:var(--muted); font-size:14px; line-height:1.7; }
+  .progress-wrap { margin:28px 0 30px; }
+  .progress-head { display:flex; justify-content:space-between; gap:12px; color:var(--muted); font-size:11px; margin-bottom:10px; }
+  .progress-head strong { color:#eaf4ff; font-weight:750; }
+  .progress-track { height:6px; width:100%; border-radius:20px; background:rgba(255,255,255,.07); overflow:hidden; }
+  .progress-fill { height:100%; width:0%; border-radius:inherit; background:linear-gradient(90deg,var(--cyan),var(--violet)); box-shadow:0 0 16px rgba(54,228,255,.35); transition:width .45s ease; }
+  .steps { display:grid; grid-template-columns:repeat(5, 1fr); gap:7px; margin-bottom:28px; }
+  .step { min-width:0; display:flex; align-items:center; flex-direction:column; gap:8px; color:#5e6b85; transition:color .25s ease; }
+  .step-number { width:34px; height:34px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.035); border-radius:11px; font-size:12px; font-weight:800; transition:all .25s ease; }
+  .step-label { font-size:10px; text-align:center; white-space:nowrap; }
+  .step.active { color:#f2f8ff; }
+  .step.active .step-number { color:#061116; border-color:transparent; background:linear-gradient(135deg,var(--cyan),#86baff); box-shadow:0 0 22px rgba(54,228,255,.2); }
+  .step.done { color:var(--green); }
+  .step.done .step-number { color:var(--green); border-color:rgba(67,243,174,.32); background:rgba(67,243,174,.10); }
+  .content-card { min-height:260px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:clamp(19px,4vw,30px); text-align:center; border:1px solid rgba(255,255,255,.08); border-radius:19px; background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012)); animation:fadeUp .35s ease both; }
+  .stage-icon { width:58px; height:58px; display:grid; place-items:center; margin-bottom:19px; border:1px solid rgba(54,228,255,.25); border-radius:18px; color:var(--cyan); background:rgba(54,228,255,.075); box-shadow:inset 0 0 20px rgba(54,228,255,.035); }
+  .stage-icon svg { width:26px; height:26px; }
+  .stage-kicker { color:var(--cyan); font-size:10px; text-transform:uppercase; letter-spacing:.17em; font-weight:850; margin-bottom:9px; }
+  h2 { font-size:clamp(20px,4vw,25px); letter-spacing:-.025em; margin-bottom:10px; }
+  .stage-copy { max-width:450px; color:var(--muted); font-size:13px; line-height:1.75; }
+  .link-status { display:flex; align-items:center; gap:8px; margin-top:19px; color:#9caac2; font-size:11px; }
+  .link-status .mini-dot { width:6px; height:6px; background:#78869e; border-radius:50%; }
+  .link-status.ready { color:var(--green); }
+  .link-status.ready .mini-dot { background:var(--green); box-shadow:0 0 10px var(--green); }
+  .actions { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:10px; margin-top:23px; width:100%; }
+  .btn { display:inline-flex; justify-content:center; align-items:center; gap:9px; min-height:46px; padding:0 20px; border-radius:12px; border:1px solid transparent; cursor:pointer; font-size:12px; font-weight:850; letter-spacing:.015em; transition:transform .2s ease, filter .2s ease, border-color .2s ease, background .2s ease; }
+  .btn:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
+  .btn:hover:not(:disabled) { transform:translateY(-2px); filter:brightness(1.07); }
+  .btn:disabled { opacity:.36; cursor:not-allowed; }
+  .btn svg { width:16px; height:16px; }
+  .btn-primary { color:#071016; background:linear-gradient(100deg,var(--cyan),#8bc8ff); box-shadow:0 8px 26px rgba(54,228,255,.13); }
+  .btn-secondary { color:#e8efff; border-color:rgba(255,255,255,.12); background:rgba(255,255,255,.045); }
+  .btn-green { color:#062016; background:linear-gradient(100deg,#43f3ae,#8bffd1); }
+  .tiny-note { margin-top:20px; text-align:center; font-size:10px; color:#65718a; line-height:1.6; }
+  .key-display { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:18px 13px; border:1px dashed rgba(67,243,174,.55); border-radius:15px; background:rgba(67,243,174,.055); margin-top:23px; flex-wrap:wrap; }
+  .key-display code { color:var(--green); font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:clamp(14px,3.5vw,20px); font-weight:900; letter-spacing:.035em; overflow-wrap:anywhere; }
+  .success-icon { border-color:rgba(67,243,174,.3); color:var(--green); background:rgba(67,243,174,.08); }
+  .footer { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:16px 5px 0; color:#56617a; font-size:10px; }
+  .footer span:last-child { text-align:right; }
+  .toast { position:fixed; left:50%; bottom:22px; z-index:9; transform:translate(-50%,18px); opacity:0; pointer-events:none; padding:12px 17px; border-radius:12px; border:1px solid rgba(67,243,174,.25); background:#111b20; color:#dfffee; font-size:12px; box-shadow:0 12px 35px rgba(0,0,0,.35); transition:all .25s ease; max-width:calc(100vw - 30px); text-align:center; }
+  .toast.show { opacity:1; transform:translate(-50%,0); }
+  .hidden { display:none !important; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  @media (max-width:520px) {
+    body { padding:16px 11px; }
+    .panel { border-radius:21px; }
+    .topline { margin-bottom:12px; }
+    .brand { font-size:10px; letter-spacing:.09em; }
+    .status { font-size:9px; letter-spacing:.08em; }
+    .steps { gap:3px; }
+    .step-number { width:30px; height:30px; border-radius:9px; }
+    .step-label { font-size:9px; letter-spacing:-.02em; }
+    .content-card { min-height:290px; }
+    .btn { width:100%; }
+    .actions { gap:8px; }
+    .footer { align-items:flex-start; font-size:9px; }
   }
-  .subtitle { color:#aaa; font-size:14px; }
-
-  .progress-bar {
-    width:100%; height:6px; background:rgba(255,255,255,0.1);
-    border-radius:10px; overflow:hidden; margin-bottom:25px;
-  }
-  .progress-fill {
-    height:100%; width:25%;
-    background:linear-gradient(90deg,#00d2ff,#3a7bd5);
-    border-radius:10px; transition:width .5s ease;
-  }
-
-  .steps { display:flex; justify-content:space-between; margin-bottom:35px; }
-  .step { text-align:center; flex:1; opacity:.4; transition:.3s; }
-  .step.active, .step.done { opacity:1; }
-  .step span {
-    display:inline-flex; align-items:center; justify-content:center;
-    width:36px; height:36px; border-radius:50%;
-    background:rgba(255,255,255,0.1); font-weight:bold;
-    margin-bottom:6px; transition:.3s;
-  }
-  .step.active span {
-    background:linear-gradient(135deg,#00d2ff,#3a7bd5);
-    box-shadow:0 0 15px rgba(0,210,255,0.6);
-  }
-  .step.done span { background:#22c55e; }
-  .step p { font-size:12px; color:#ccc; }
-
-  .content { min-height:200px; display:flex; align-items:center; justify-content:center; }
-  .etapa { text-align:center; animation:fadeIn .4s ease; width:100%; }
-  .etapa h2 { font-size:20px; margin-bottom:12px; color:#00d2ff; }
-  .etapa p { color:#bbb; margin-bottom:20px; line-height:1.6; }
-  .hidden { display:none; }
-
-  .btn {
-    padding:12px 28px; border:none; border-radius:10px;
-    font-size:15px; font-weight:600; cursor:pointer;
-    transition:.3s; margin:6px;
-  }
-  .btn.primary {
-    background:linear-gradient(135deg,#00d2ff,#3a7bd5);
-    color:#fff; box-shadow:0 8px 20px rgba(0,210,255,0.3);
-  }
-  .btn.primary:hover { transform:translateY(-2px); box-shadow:0 12px 25px rgba(0,210,255,0.5); }
-  .btn.secondary {
-    background:rgba(255,255,255,0.1); color:#fff;
-    border:1px solid rgba(255,255,255,0.2);
-  }
-  .btn.secondary:hover { background:rgba(255,255,255,0.2); }
-  .btn.copy { background:#22c55e; color:#fff; padding:8px 16px; font-size:13px; }
-
-  .key-box {
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    background:rgba(0,0,0,0.4); border:2px dashed #00d2ff;
-    border-radius:12px; padding:18px; margin:20px 0; flex-wrap:wrap;
-  }
-  .key-box code {
-    font-family:'Courier New',monospace; font-size:18px;
-    letter-spacing:2px; color:#00ff9d; font-weight:bold;
-  }
-
-  .loader {
-    width:50px; height:50px; border:4px solid rgba(255,255,255,0.1);
-    border-top-color:#00d2ff; border-radius:50%;
-    animation:spin 1s linear infinite; margin:20px auto;
-  }
-  @keyframes spin { to { transform:rotate(360deg); } }
-  @keyframes fadeIn {
-    from { opacity:0; transform:translateY(10px); }
-    to { opacity:1; transform:translateY(0); }
-  }
-  footer { text-align:center; margin-top:30px; font-size:12px; color:#666; }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; transition-duration:.01ms !important; } }
 </style>
 </head>
 <body>
-
-<div class="container">
-  <header>
-    <h1>🔐 Gerador de Keys</h1>
-    <p class="subtitle">Complete as 4 etapas para gerar sua key</p>
-  </header>
-
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+<div class="app">
+  <div class="topline">
+    <div class="brand"><label class="brand-mark" id="logoPickerLabel" title="Toque para escolher sua foto"><span class="default-mark">∞</span><img id="logoPhoto" alt="Logo INFINITY MODZ"><input id="logoPicker" type="file" accept="image/*" hidden></label><div><span>INFINITY MODZ</span><span class="logo-hint">Toque no símbolo para colocar sua foto</span></div></div>
+    <div class="status"><span class="status-dot"></span> Sistema online</div>
   </div>
 
-  <div class="steps">
-    <div class="step active" data-step="1"><span>1</span><p>Início</p></div>
-    <div class="step" data-step="2"><span>2</span><p>Encurtador</p></div>
-    <div class="step" data-step="3"><span>3</span><p>Validação</p></div>
-    <div class="step" data-step="4"><span>4</span><p>Key</p></div>
-  </div>
-
-  <main class="content">
-    <section class="etapa" id="etapa1">
-      <h2>Etapa 1 — Verificação</h2>
-      <p>Clique abaixo para iniciar o processo de geração.</p>
-      <button class="btn primary" onclick="iniciarProcesso()">Iniciar</button>
-    </section>
-
-    <section class="etapa hidden" id="etapa2">
-      <h2>Etapa 2 — Encurtador</h2>
-      <p>Você será redirecionado para o encurtador.<br>Após concluir, volte aqui e clique em "Já concluí".</p>
-      <button class="btn primary" onclick="abrirEncurtador()">Abrir Encurtador</button>
-      <button class="btn secondary" onclick="verificarRetorno()">Já concluí</button>
-    </section>
-
-    <section class="etapa hidden" id="etapa3">
-      <h2>Etapa 3 — Validação</h2>
-      <p class="loading-text">Verificando token...</p>
-      <div class="loader"></div>
-    </section>
-
-    <section class="etapa hidden" id="etapa4">
-      <h2>Etapa 4 — Sua Key</h2>
-      <p>Parabéns! Aqui está sua key:</p>
-      <div class="key-box">
-        <code id="keyGerada">XXXX-XXXX-XXXX-XXXX</code>
-        <button class="btn copy" onclick="copiarKey(event)">📋 Copiar</button>
+  <main class="panel">
+    <header class="hero">
+      <div class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 7.5 7.5 9.5 4.3-2 7.5-5 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        Área de acesso premium
       </div>
-      <button class="btn secondary" onclick="location.reload()">Gerar Novamente</button>
+      <h1>Desbloqueie sua <span class="gradient">KEY</span></h1>
+      <p class="subtitle">Complete as cinco etapas para liberar sua chave de acesso INFINITY MODZ.</p>
+    </header>
+
+    <div class="progress-wrap">
+      <div class="progress-head"><span id="progressLabel">PROGRESSO DA MISSÃO</span><strong id="progressCount">0 de 5 concluídas</strong></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <nav class="steps" aria-label="Etapas do processo">
+      <div class="step active" data-step="1"><div class="step-number">01</div><div class="step-label">Link 01</div></div>
+      <div class="step" data-step="2"><div class="step-number">02</div><div class="step-label">Link 02</div></div>
+      <div class="step" data-step="3"><div class="step-number">03</div><div class="step-label">Link 03</div></div>
+      <div class="step" data-step="4"><div class="step-number">04</div><div class="step-label">Link 04</div></div>
+      <div class="step" data-step="5"><div class="step-number">05</div><div class="step-label">Link 05</div></div>
+    </nav>
+
+    <section class="content-card" id="stageCard" aria-live="polite">
+      <div class="stage-icon" id="stageIcon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg>
+      </div>
+      <div class="stage-kicker" id="stageKicker">ETAPA 01 / 05</div>
+      <h2 id="stageTitle">Acesse o primeiro link</h2>
+      <p class="stage-copy" id="stageCopy">Clique no botão abaixo para abrir o link da etapa em uma nova aba. Depois, volte para esta página.</p>
+      <div class="link-status" id="linkStatus"><span class="mini-dot"></span><span id="statusText">Aguardando abertura do link</span></div>
+      <div class="actions" id="stageActions">
+        <button class="btn btn-primary" id="openBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg>
+          Abrir Link 01
+        </button>
+        <button class="btn btn-secondary" id="continueBtn" type="button" disabled>Continuar <span aria-hidden="true">→</span></button>
+      </div>
     </section>
+    <p class="tiny-note" id="tinyNote">Dica: após abrir o link, conclua as instruções na outra aba e volte aqui para continuar.</p>
   </main>
 
-  <footer>
-    <p>© 2025 KeyGen System — Todos os direitos reservados</p>
-  </footer>
+  <footer class="footer"><span>© <span id="yearNow"></span> INFINITY MODZ</span><span>KEY ACCESS <span aria-hidden="true">•</span> V1.0</span></footer>
 </div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-// ==========================================
-// CONFIGURAÇÕES
-// ==========================================
+// ========================================================
+// CONFIGURAÇÃO: substitua os 5 endereços pelos seus links.
+// Ex.: { title: "Link 01", url: "https://seu-encurtador.com/abc" }
+// ========================================================
 const CONFIG = {
-  // 🔧 COLOQUE AQUI SEU LINK DE ENCURTADOR REAL
-  // Exemplo ShrinkMe: https://shrinkme.io/st?api=SEU_TOKEN&url=https://seusite.com
-  encurtadorURL: "https://example.com/seu-encurtador",
-
-  // Tempo mínimo (em segundos) que o usuário deve aguardar
-  tempoMinimoEncurtador: 10,
-
-  // Prefixo das keys
-  prefixoKey: "KEY"
+  tempoMinimoSegundos: 5,
+  tamanhoParteAleatoria: 10,
+  // Link de demonstração funcional. Troque cada URL pelos seus links encurtados reais.
+  links: [
+    { title: "Link 01", url: "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal" },
+    { title: "Link 02", url: "https://archive.org/" },
+    { title: "Link 03", url: "https://github.com/" },
+    { title: "Link 04", url: "https://developer.mozilla.org/pt-BR/" },
+    { title: "Link 05", url: "https://www.nasa.gov/" }
+  ]
 };
 
-// ==========================================
-// ESTADO
-// ==========================================
-const state = {
-  etapaAtual: 1,
-  timestampIda: null,
-  tokenValido: false
-};
+const state = { etapa: 0, abriuLink: false, liberado: false, timer: null, segundosRestantes: 0, key: "" };
+const $ = (id) => document.getElementById(id);
+const letters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-// ==========================================
-// NAVEGAÇÃO ENTRE ETAPAS
-// ==========================================
-function irParaEtapa(numero) {
-  state.etapaAtual = numero;
+function notify(message) {
+  const toast = $("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(notify.timer);
+  notify.timer = setTimeout(() => toast.classList.remove("show"), 3000);
+}
 
-  document.querySelectorAll('.etapa').forEach(el => el.classList.add('hidden'));
-  document.getElementById(`etapa${numero}`).classList.remove('hidden');
-
-  const progresso = (numero / 4) * 100;
-  document.getElementById('progressFill').style.width = progresso + '%';
-
-  document.querySelectorAll('.step').forEach(step => {
-    const n = parseInt(step.dataset.step);
-    step.classList.remove('active', 'done');
-    if (n < numero) step.classList.add('done');
-    if (n === numero) step.classList.add('active');
+function iconLink() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3A5 5 0 0 0 11 21.1l1.7-1.7"/></svg>';
+}
+function iconSuccess() {
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7 10 17l-5-5"/><path d="M12 3a9 9 0 1 0 9 9"/></svg>';
+}
+function gerarParteAleatoria(tamanho) {
+  const bytes = new Uint8Array(tamanho);
+  if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
+  else for (let i = 0; i < tamanho; i++) bytes[i] = Math.floor(Math.random() * 256);
+  return Array.from(bytes, byte => letters[byte % letters.length]).join("");
+}
+function atualizarProgresso() {
+  const concluidas = state.etapa;
+  $("progressFill").style.width = `${(concluidas / CONFIG.links.length) * 100}%`;
+  $("progressCount").textContent = `${concluidas} de ${CONFIG.links.length} concluídas`;
+  document.querySelectorAll(".step").forEach((el, i) => {
+    el.classList.toggle("active", i === state.etapa && state.etapa < CONFIG.links.length);
+    el.classList.toggle("done", i < concluidas);
+    const n = el.querySelector(".step-number");
+    n.textContent = i < concluidas ? "✓" : String(i + 1).padStart(2, "0");
   });
 }
-
-// ==========================================
-// ETAPA 1 → Iniciar
-// ==========================================
-function iniciarProcesso() {
-  irParaEtapa(2);
+function mostrarEtapa() {
+  clearInterval(state.timer);
+  state.abriuLink = false;
+  state.liberado = false;
+  const item = CONFIG.links[state.etapa];
+  atualizarProgresso();
+  $("stageIcon").classList.remove("success-icon");
+  $("stageIcon").innerHTML = iconLink();
+  $("stageKicker").textContent = `ETAPA ${String(state.etapa + 1).padStart(2, "0")} / 05`;
+  $("stageTitle").textContent = `Acesse o ${item.title.toLowerCase()}`;
+  $("stageCopy").textContent = "Clique para abrir o encurtador em uma nova aba. Conclua as instruções apresentadas lá e retorne a esta página.";
+  $("linkStatus").classList.remove("ready");
+  $("statusText").textContent = "Aguardando abertura do link";
+  $("openBtn").disabled = false;
+  $("openBtn").innerHTML = `${iconLink()} Abrir ${item.title}`;
+  $("continueBtn").disabled = true;
+  $("continueBtn").innerHTML = 'Continuar <span aria-hidden="true">→</span>';
+  $("stageActions").classList.remove("hidden");
+  $("tinyNote").textContent = "Dica: após abrir o link, conclua as instruções na outra aba e volte aqui para continuar.";
 }
-
-// ==========================================
-// ETAPA 2 → Abrir Encurtador
-// ==========================================
-function abrirEncurtador() {
-  state.timestampIda = Date.now();
-  localStorage.setItem('keygen_timestamp', state.timestampIda);
-  window.open(CONFIG.encurtadorURL, '_blank');
-}
-
-// ==========================================
-// ETAPA 2 → Verificar Retorno
-// ==========================================
-function verificarRetorno() {
-  const timestampSalvo = parseInt(localStorage.getItem('keygen_timestamp') || '0');
-  const diferencaSegundos = (Date.now() - timestampSalvo) / 1000;
-
-  if (!timestampSalvo || diferencaSegundos < CONFIG.tempoMinimoEncurtador) {
-    const faltam = Math.ceil(CONFIG.tempoMinimoEncurtador - diferencaSegundos);
-    alert(`⚠️ Aguarde pelo menos ${CONFIG.tempoMinimoEncurtador}s no encurtador!\nFaltam: ${faltam}s`);
+function abrirLink() {
+  const item = CONFIG.links[state.etapa];
+  const url = (item.url || "").trim();
+  if (!url || url.includes("SEU_LINK") || url.includes("example.com")) {
+    notify(`Configure o endereço do ${item.title} no início do arquivo HTML.`);
     return;
   }
-
-  irParaEtapa(3);
-  setTimeout(validarToken, 2000);
-}
-
-// ==========================================
-// ETAPA 3 → Validação
-// ==========================================
-function validarToken() {
-  const timestampSalvo = parseInt(localStorage.getItem('keygen_timestamp') || '0');
-  const diferencaSegundos = (Date.now() - timestampSalvo) / 1000;
-
-  if (diferencaSegundos >= CONFIG.tempoMinimoEncurtador) {
-    state.tokenValido = true;
-    irParaEtapa(4);
-    gerarKey();
-  } else {
-    alert('❌ Validação falhou. Tente novamente.');
-    irParaEtapa(1);
+  let parsed;
+  try { parsed = new URL(url); } catch { notify(`O endereço do ${item.title} não é válido.`); return; }
+  if (parsed.protocol !== "https:" && parsed.protocol !== "http:") {
+    notify("Use um endereço que comece com http:// ou https://."); return;
   }
-}
-
-// ==========================================
-// ETAPA 4 → Gerar Key
-// ==========================================
-function gerarKey() {
-  const key = gerarKeyAleatoria();
-  document.getElementById('keyGerada').textContent = key;
-
-  const historico = JSON.parse(localStorage.getItem('keygen_historico') || '[]');
-  historico.push({ key, data: new Date().toISOString() });
-  localStorage.setItem('keygen_historico', JSON.stringify(historico));
-}
-
-function gerarKeyAleatoria() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const blocos = [];
-  for (let i = 0; i < 4; i++) {
-    let bloco = '';
-    for (let j = 0; j < 4; j++) {
-      bloco += chars.charAt(Math.floor(Math.random() * chars.length));
+  // A abertura acontece diretamente no clique para reduzir bloqueios de pop-up.
+  const novaAba = window.open(parsed.href, "_blank", "noopener,noreferrer");
+  if (!novaAba) notify("A aba pode ter sido bloqueada. Permita pop-ups para este site e tente novamente.");
+  state.abriuLink = true;
+  state.liberado = false;
+  state.segundosRestantes = CONFIG.tempoMinimoSegundos;
+  $("openBtn").disabled = true;
+  $("linkStatus").classList.remove("ready");
+  $("statusText").textContent = `Aguarde ${state.segundosRestantes}s para continuar`;
+  state.timer = setInterval(() => {
+    state.segundosRestantes--;
+    if (state.segundosRestantes > 0) {
+      $("statusText").textContent = `Aguarde ${state.segundosRestantes}s para continuar`;
+    } else {
+      clearInterval(state.timer);
+      state.liberado = true;
+      $("linkStatus").classList.add("ready");
+      $("statusText").textContent = "Tempo concluído — você já pode continuar";
+      $("continueBtn").disabled = false;
+      $("openBtn").disabled = false;
+      $("openBtn").innerHTML = `${iconLink()} Abrir novamente`;
     }
-    blocos.push(bloco);
-  }
-  return `${CONFIG.prefixoKey}-${blocos.join('-')}`;
+  }, 1000);
 }
+function continuar() {
+  if (!state.abriuLink || !state.liberado) return;
+  state.etapa++;
+  if (state.etapa >= CONFIG.links.length) { mostrarResultado(); return; }
+  mostrarEtapa();
+}
+function mostrarResultado() {
+  clearInterval(state.timer);
+  atualizarProgresso();
+  $("progressFill").style.width = "100%";
+  $("progressCount").textContent = "5 de 5 concluídas";
+  document.querySelectorAll(".step").forEach(el => { el.classList.remove("active"); el.classList.add("done"); el.querySelector(".step-number").textContent = "✓"; });
+  state.key = "";
+  $("stageIcon").classList.remove("success-icon");
+  $("stageIcon").innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 10h.01M16 10h.01M8 15c1.2 1 2.4 1.5 4 1.5s2.8-.5 4-1.5"/></svg>';
+  $("stageKicker").textContent = "VERIFICAÇÃO FINAL";
+  $("stageTitle").textContent = "Confirme que você não é um robô";
+  $("stageCopy").textContent = "Você concluiu as cinco etapas. Marque a caixa abaixo para revelar sua key.";
+  $("linkStatus").classList.remove("ready");
+  $("statusText").textContent = "Aguardando verificação";
+  $("stageActions").classList.add("hidden");
+  $("stageCard").querySelectorAll(".key-display, .robot-check, .robot-note, .btn-secondary[style]").forEach(el => el.remove());
 
-// ==========================================
-// COPIAR KEY
-// ==========================================
-function copiarKey(event) {
-  const key = document.getElementById('keyGerada').textContent;
-  navigator.clipboard.writeText(key).then(() => {
-    const btn = event.target;
-    const original = btn.textContent;
-    btn.textContent = '✅ Copiado!';
-    setTimeout(() => btn.textContent = original, 1500);
+  const check = document.createElement("div");
+  check.className = "robot-check";
+  check.innerHTML = '<label class="robot-left"><input type="checkbox" id="robotCheckbox"><span>Não sou um robô</span></label><div class="robot-brand"><strong>↻</strong>Verificação<br>de segurança</div>';
+  const note = document.createElement("p");
+  note.className = "robot-note";
+  note.textContent = "Verificação demonstrativa: uma caixa de seleção no navegador não substitui um CAPTCHA real.";
+  $("stageCard").appendChild(check);
+  $("stageCard").appendChild(note);
+  $("robotCheckbox").addEventListener("change", (event) => {
+    if (!event.target.checked) return;
+    event.target.disabled = true;
+    note.textContent = "Verificação concluída. Preparando sua key…";
+    setTimeout(revelarKey, 650);
   });
+  $("tinyNote").textContent = "Último passo: confirme a verificação para liberar sua key.";
 }
-
-// ==========================================
-// INICIALIZAÇÃO
-// ==========================================
-window.addEventListener('DOMContentLoaded', () => {
-  irParaEtapa(1);
+function revelarKey() {
+  state.key = `INFINITY-MODZ-${gerarParteAleatoria(CONFIG.tamanhoParteAleatoria)}`;
+  $("stageCard").querySelectorAll(".robot-check, .robot-note").forEach(el => el.remove());
+  $("stageIcon").classList.add("success-icon");
+  $("stageIcon").innerHTML = iconSuccess();
+  $("stageKicker").textContent = "PROCESSO CONCLUÍDO";
+  $("stageTitle").textContent = "Sua key está liberada!";
+  $("stageCopy").textContent = "Todas as etapas foram concluídas. Copie sua chave abaixo.";
+  $("linkStatus").classList.add("ready");
+  $("statusText").textContent = "Acesso concluído";
+  const box = document.createElement("div");
+  box.className = "key-display";
+  const code = document.createElement("code");
+  code.id = "keyText";
+  code.textContent = state.key;
+  const copyBtn = document.createElement("button");
+  copyBtn.className = "btn btn-green";
+  copyBtn.type = "button";
+  copyBtn.textContent = "Copiar key";
+  copyBtn.addEventListener("click", copiarKey);
+  box.append(code, copyBtn);
+  const again = document.createElement("button");
+  again.className = "btn btn-secondary";
+  again.type = "button";
+  again.textContent = "Gerar outra key";
+  again.style.marginTop = "12px";
+  again.addEventListener("click", reiniciar);
+  $("stageCard").appendChild(box);
+  $("stageCard").appendChild(again);
+  $("tinyNote").textContent = "Guarde sua key em um local seguro.";
+}
+async function copiarKey() {
+  try {
+    await navigator.clipboard.writeText(state.key);
+    notify("Key copiada para a área de transferência!");
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = state.key;
+    area.style.position = "fixed"; area.style.opacity = "0";
+    document.body.appendChild(area); area.select();
+    const ok = document.execCommand("copy"); area.remove();
+    notify(ok ? "Key copiada para a área de transferência!" : "Não foi possível copiar automaticamente. Selecione e copie a key.");
+  }
+}
+function reiniciar() {
+  state.etapa = 0; state.key = "";
+  const card = $("stageCard");
+  card.querySelectorAll(".key-display, .robot-check, .robot-note, .btn-secondary[style]").forEach(el => el.remove());
+  $("stageActions").classList.remove("hidden");
+  mostrarEtapa();
+}
+$("logoPicker").addEventListener("change", (event) => {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  if (!file.type.startsWith("image/")) { notify("Escolha um arquivo de imagem."); return; }
+  if (file.size > 5 * 1024 * 1024) { notify("Escolha uma imagem de até 5 MB."); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    $("logoPhoto").src = reader.result;
+    $("logoPickerLabel").classList.add("has-photo");
+  };
+  reader.readAsDataURL(file);
 });
+$("openBtn").addEventListener("click", abrirLink);
+$("continueBtn").addEventListener("click", continuar);
+$("yearNow").textContent = new Date().getFullYear();
+mostrarEtapa();
 </script>
-
 </body>
 </html>
